@@ -4,19 +4,29 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 
 public class GETBooks {
 
-    String baseURI="https://simple-books-api.glitch.me/books";
+    String baseURII="https://simple-books-api.glitch.me/books";
+
+   // String baseURI= RestAssured.baseURI="https://simple-books-api.glitch.me";
+
+    @BeforeClass
+    public void setup(){
+
+        RestAssured.baseURI="https://simple-books-api.glitch.me";
+
+    }
 
     @Test(description = "Given baseURI When we make a GET call to /books Then Verify status code is 200")
     public void verifyStatusCode(){
         //Given and When
 
-        Response response= RestAssured.get(baseURI); //Right here we make the call, get response, and save it in response object
+        Response response= RestAssured.get("/books"); //Right here we make the call, get response, and save it in response object
         int actualStatusCode=response.getStatusCode();
         int expectedStatusCode=200;
 
@@ -32,7 +42,7 @@ public class GETBooks {
         RequestSpecification request= given().queryParam("limit",2);
 
         //When - Here we will make the API call
-        Response response = request.when().get(baseURI);
+        Response response = request.when().get("/books");
 
         //Then - Verify
         response.then().assertThat().statusCode(200);
@@ -65,7 +75,7 @@ public class GETBooks {
                 .queryParams("type","fiction","limit",1);
 
         //When
-        Response response=request.when().get(baseURI);
+        Response response=request.when().get("/books");
 
         //Then
         response.then().assertThat().statusCode(200);
@@ -92,7 +102,7 @@ public class GETBooks {
         RequestSpecification request=given().queryParam("type","crime");
 
         //When
-        Response response=request.when().get(baseURI);
+        Response response=request.when().get("/books");
 
 
         //Then
@@ -104,7 +114,7 @@ public class GETBooks {
         RequestSpecification request= given().queryParam("limit",100);
 
         //When
-        Response response=request.when().get(baseURI);
+        Response response=request.when().get("/books");
 
 
         //Then
@@ -120,7 +130,7 @@ public class GETBooks {
         RequestSpecification request=given().pathParam("bookId",bookIdFromUtils);
 
         //When
-        Response response=request.when().get(baseURI+"/{bookId}");
+        Response response=request.when().get("/books/{bookId}");
 
         //Then
         response.then().assertThat().statusCode(200);
