@@ -68,8 +68,71 @@ public class POSTOrderBook extends booksApiHooks {
 
         String actualCustomerName=listOfOrdersResponse.jsonPath().getString("[0].customerName");
         Assert.assertTrue(actualCustomerName.contains(customerName));
+
+        //UPDATE ORDER - PATCH
+        //Token, Content-Type as a header, path param, requestbody
+        String newCustomerName="Mansur";
+
+        JSONObject objectforNewName=new JSONObject();
+        objectforNewName.put("customerName",newCustomerName);
+        String updateOrderRequestPayload=objectforNewName.toString();
+
+        //Given
+        RequestSpecification updateOrderRequest=given()
+                .pathParam("orderId",orderId)
+                .header("Content-Type","application/json")
+                .header("Authorization",token)
+                .body(updateOrderRequestPayload);
+        //When
+        Response updateOrderResponse=updateOrderRequest.when().patch("/orders/{orderId}");
+
+        //Then
+        updateOrderResponse.then().assertThat().statusCode(204);
+
+        //MAKE ANOTHER CALL TO : List of Order(s)
+        listofOrdersRequest=given()
+                .header("Authorization",token);
+        listOfOrdersResponse=listofOrdersRequest.when().get("/orders");
+
+        listOfOrdersResponse.then().assertThat().statusCode(200);
+
+        System.out.println(listOfOrdersResponse.getBody().asString());
+
+        String actualNewCustomerName=listOfOrdersResponse.jsonPath().getString("[0].customerName");
+        System.out.println(actualNewCustomerName);
+        Assert.assertEquals(actualNewCustomerName,newCustomerName);
+
+        //DELETE ORDER
+
+        //Given
+        //Token, path param, Content-Type, Delete(HTTP METHOD)
+
+        RequestSpecification deleteRequest=given()
+                .pathParam("orderId",orderId)
+                .header("Content-Type","application/json")
+                .header("Authorization",token)
+                .body("{}");
+
+        //When
+        Response deleteOrderResponse=deleteRequest.when().delete("/orders/{orderId}");
+
+        //Then
+        deleteOrderResponse.then().assertThat().statusCode(204);
+
+
+        //MAKE ANOTHER CALL TO : List of Order(s)
+        //Given
+        listofOrdersRequest=given()
+                .header("Authorization",token);
+        //When
+        listOfOrdersResponse=listofOrdersRequest.when().get("/orders");
+        //Then
+        listOfOrdersResponse.then().assertThat().statusCode(200);
+
+        System.out.println(listOfOrdersResponse.getBody().asString());
+
+        String listofOrderResponseBody= listOfOrdersResponse.getBody().asString();
+        Assert.assertTrue(!listofOrderResponseBody.contains(orderId));
+        Assert.assertFalse(listofOrderResponseBody.contains(orderId));
     }
-
-
-
 }

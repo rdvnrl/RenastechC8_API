@@ -9,6 +9,7 @@ public class booksApiHooks {
     public void setup(){
 
         RestAssured.baseURI="https://simple-books-api.glitch.me";
+        System.out.println("Api call for /orders started");
 
     }
 }
