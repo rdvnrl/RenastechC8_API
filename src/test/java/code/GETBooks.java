@@ -86,7 +86,46 @@ public class GETBooks {
 
     }
 
+    @Test(description = "Given a baseURI When We make the GET call to /books and query param as type=crime(doesnt exist) Then Verify Status Code" )
+    public void userRetrieveListofBooksNegative(){
+        //Given
+        RequestSpecification request=given().queryParam("type","crime");
+
+        //When
+        Response response=request.when().get(baseURI);
 
 
+        //Then
+        response.then().assertThat().statusCode(400);
+    }
+    @Test(description = "Given a baseURI When We make the GET call to /books and query param as limit=100(doesnt exist) Then Verify Status Code")
+      public void userRetrieveListofBooksNegativeTC2(){
+        //Given
+        RequestSpecification request= given().queryParam("limit",100);
 
+        //When
+        Response response=request.when().get(baseURI);
+
+
+        //Then
+        response.then().assertThat().statusCode(400);
+
+    }
+
+    @Test(description = "Given a baseURI When We make the GET call to /books and path param bookid=1 Then Verify Status Code")
+    public void userRetrieveSingleBookInformation(){
+        String bookId="1";
+        String bookIdFromUtils=utils.getBookId();
+        //Given
+        RequestSpecification request=given().pathParam("bookId",bookIdFromUtils);
+
+        //When
+        Response response=request.when().get(baseURI+"/{bookId}");
+
+        //Then
+        response.then().assertThat().statusCode(200);
+        System.out.println(response.getBody().asString());
+
+
+    }
 }
