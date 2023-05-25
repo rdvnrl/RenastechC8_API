@@ -1,4 +1,4 @@
-package code;
+package code.utils;
 
 import com.github.javafaker.Faker;
 import io.restassured.RestAssured;

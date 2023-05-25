@@ -1,5 +1,6 @@
-package code;
+package code.TestScenarios;
 
+import code.utils.utils;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -125,7 +126,7 @@ public class GETBooks {
     @Test(description = "Given a baseURI When We make the GET call to /books and path param bookid=1 Then Verify Status Code")
     public void userRetrieveSingleBookInformation(){
         String bookId="1";
-        String bookIdFromUtils=utils.getBookId();
+        String bookIdFromUtils= utils.getBookId();
         //Given
         RequestSpecification request=given().pathParam("bookId",bookIdFromUtils);
 

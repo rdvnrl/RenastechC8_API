@@ -1,5 +1,6 @@
-package code;
+package code.TestScenarios;
 
+import code.utils.utils;
 import io.restassured.RestAssured;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

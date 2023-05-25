@@ -1,4 +1,4 @@
-package code;
+package code.TestScenarios;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
