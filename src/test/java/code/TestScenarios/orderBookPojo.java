@@ -3,7 +3,7 @@ package code.TestScenarios;
 public class orderBookPojo {
 
     public String bookId;
-    public int bookID;
+//    public int bookID;
     public String customerName;
 
     public orderBookPojo(String bookId, String customerName){
@@ -14,10 +14,10 @@ public class orderBookPojo {
         this.customerName=customerName;
     }
 
-    public orderBookPojo(int bookID){
-        this.bookID=bookID;
-
-    }
+//    public orderBookPojo(int bookID){
+//        this.bookID=bookID;
+//
+//    }
 
 
 }
