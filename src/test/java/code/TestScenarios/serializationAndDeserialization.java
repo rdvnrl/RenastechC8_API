@@ -1,5 +1,7 @@
 package code.TestScenarios;
 
+import java.util.ArrayList;
+
 public class serializationAndDeserialization {
     //This will our pojo class
     //What is serialization and deserialization
@@ -14,14 +16,16 @@ public class serializationAndDeserialization {
     //Is it possible to access private variables if we dont use Setters and Getters?
     //Reflection
 
-    private String bookId;
+    private int bookId;
     private String customerName;
 
-    public String getBookId() {
+    private ArrayList bookIds;
+
+    public int getBookId() {
         return bookId;
     }
 
-    public void setBookId(String bookId) {
+    public void setBookId(int bookId) {
         this.bookId = bookId;
     }
 
@@ -31,5 +35,13 @@ public class serializationAndDeserialization {
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
+    }
+
+    public ArrayList getBookIds() {
+        return bookIds;
+    }
+
+    public void setBookIds(ArrayList bookIds) {
+        this.bookIds = bookIds;
     }
 }
