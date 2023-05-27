@@ -185,7 +185,7 @@ public class POSTOrderBookPOJO extends booksApiHooks {
 //        }
 
         //        {
-//                 "bookId" : "1",
+//                 "bookId" : "1", >> it shoulnt be string - another bug
 //                "customerName" : "Cole Ortiz Jr."
 //        }
                     //API SCHEMA
@@ -200,7 +200,7 @@ public class POSTOrderBookPOJO extends booksApiHooks {
 
         //Create new customer name
         String newName="Nelly";
-        orderBookPojo orderBookPOJO=new orderBookPojo("4",newName);
+        orderBookPojo orderBookPOJO=new orderBookPojo(newName);
         System.out.println(orderBookPOJO.toString());
         ObjectMapper objectMapper1=new ObjectMapper();
 
